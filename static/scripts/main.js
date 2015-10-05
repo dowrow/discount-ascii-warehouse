@@ -1,8 +1,16 @@
-require(['jquery', 'product-factory'], function ($, ProductFactory) {
+require(['jquery', 'product-factory', 'product-api'], function ($, ProductFactory, ProductAPI) {
 	
 	function main () {
-		var html = ProductFactory.create('9-uvfcjzwp3z0k9', '(¬_¬)', 20, 351, 'Wed Sep 23 2015 19:59:24 GMT+0200 (CEST)');
-		$('.products').html(html);
+
+		ProductAPI.fetch('price', 0, 10000, function (products) {
+			var html = '';
+			products.forEach(function (product) {
+				html += ProductFactory.create(product.id, product.face, product.size, product.price, product.date);
+			});
+			$('.products').html(html);
+		});
+
+		
 	}
 
 	$(document).ready(main);

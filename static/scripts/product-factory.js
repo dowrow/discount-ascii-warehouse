@@ -2,7 +2,7 @@
  * Product Factory
  * Defines methods required to create products
  */
-define([], function ($) {
+define([], function () {
 
 	function formatPrice (price) {
 		return '$' + (parseInt(price) / 100);
@@ -33,7 +33,7 @@ define([], function ($) {
 		         return Math.round(elapsed/msPerDay) + ' days ago';   
 		    }
 	    } else {
-	    	return timestamp;
+	    	return previous.getDate() + '/' + previous.getMonth() + '/' + previous.getFullYear();
 	    }
 	}
 
@@ -54,7 +54,12 @@ define([], function ($) {
 	 */
 	return {
 		/**
-		 * Get a products html given its id, face, size, price and date 
+		 * Get a products html 
+		 * @param {string} id
+		 * @param {string} face 
+		 * @param {integer} size
+		 * @param {integer} price
+		 * @param {string} date 
 		 * @type {void}
 		 */
 		create: create
