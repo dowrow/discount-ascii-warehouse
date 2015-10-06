@@ -1,7 +1,6 @@
 /**
  * Product API
- * Defines methods fetch products
- * Requires jQuery
+ * Fetch products from API
  */
 define(['jquery'], function ($) {
 

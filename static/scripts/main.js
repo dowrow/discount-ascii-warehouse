@@ -1,17 +1,21 @@
-require(['jquery', 'product-factory', 'product-api'], function ($, ProductFactory, ProductAPI) {
+require(['jquery', 'controllers/grid-controller'], function ($, GridController) {
 	
 	function main () {
+		$('#sortBy').change(onSortChange);
+		$(window).scroll(onWindowScroll);
+		GridController.setUp();
+	}
 
-		ProductAPI.fetch('price', 0, 10000, function (products) {
-			var html = '';
-			products.forEach(function (product) {
-				html += ProductFactory.create(product.id, product.face, product.size, product.price, product.date);
-			});
-			$('.products').html(html);
-		});
+	function onSortChange(){
+		GridController.sortBy($(this).val());
+	}
 
-		
+	function onWindowScroll() {
+		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+	    	GridController.showMore();
+		}
 	}
 
 	$(document).ready(main);
+
 });

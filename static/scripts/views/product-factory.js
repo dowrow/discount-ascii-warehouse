@@ -1,6 +1,6 @@
 /**
  * Product Factory
- * Defines methods required to create products
+ * Creates products' html
  */
 define([], function () {
 
@@ -19,7 +19,6 @@ define([], function () {
 	    var elapsed = current - previous;
 	    
 	    if (elapsed <= msPerWeek) {
-
 		    if (elapsed < msPerMinute) {
 		         return Math.round(elapsed/1000) + ' seconds ago';   
 		    }
@@ -55,11 +54,11 @@ define([], function () {
 	return {
 		/**
 		 * Get a products html 
-		 * @param {string} id
-		 * @param {string} face 
-		 * @param {integer} size
-		 * @param {integer} price
-		 * @param {string} date 
+		 * @param {string} id Unique identifier
+		 * @param {string} face ASCII face
+		 * @param {integer} size Size in pixels
+		 * @param {integer} price Price in cents
+		 * @param {string} date Date as timestamp
 		 * @type {void}
 		 */
 		create: create

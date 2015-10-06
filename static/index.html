@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Discount Ascii Warehouse</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-    </head>
-    <body>
-        <header>
-            <h1>Discount Ascii Warehouse</h1>
+<head>
+    <title>Discount Ascii Warehouse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <header>
+        <h1>Discount Ascii Warehouse</h1>
 
-            <p>Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
+        <p>Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
 
-            <p>But first, a word from our sponsors:</p> <script>document.write('<img class="ad" src="/ad/?r=' + Math.floor(Math.random()*1000) + '"/>');</script>
-        </header>
+        <p>But first, a word from our sponsors:</p><!-- <script>document.write('<img class="ad" src="/ad/?r=' + Math.floor(Math.random()*1000) + '"/>');</script>-->
+    </header>
 
-        <section class="products pure-g">
+    <label for="sortBy">Sort products by: </label>
+    <select name="sortBy" id="sortBy">
+        <option value="id">Id</option>
+        <option value="price">Price</option>
+        <option value="size">Size</option>
+    </select>
 
-        </section>
-        
-        <script data-main="scripts/main" src="scripts/require.js"></script>
-    </body>
+    <section class="products pure-g">
+
+    </section>
+    <div id="loading-animation"></div>
+    <script data-main="scripts/main" src="scripts/require.js"></script>
+</body>
 </html>
