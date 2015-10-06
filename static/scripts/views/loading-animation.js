@@ -6,14 +6,18 @@
 define(['jquery'], function ($) {
 
 	var url = "/images/spinner.gif";
+
+	var spanElement = $('<span class="pure-u-1-1" id="loading">Loading...</span>');
 	var imageElement = $('<img id="spinner" src="' + url + '"/>');
 
 	function show () {
+		spanElement.appendTo('.products');
 		imageElement.appendTo('.products');
 	}
 
 	function hide () {
 		$('#spinner').remove();
+		$('#loading').remove();
 	}
 	
 	/**

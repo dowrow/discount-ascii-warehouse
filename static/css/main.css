@@ -11,7 +11,7 @@ body {
 	text-align: center;
 }
 
-.face , .price, .date {
+.face , .size, .price, .date {
 	display: inline-block;
 	width: 100%;
 	margin:10px;	
@@ -20,4 +20,17 @@ body {
 .face {
 	height: 80px;
 	line-height: 80px;
+}
+
+#loading {
+	width: 100%;
+	text-align: center;
+}
+
+#spinner {
+	position: relative;
+	height: 100px;
+	width: 100px;
+	left:50%;
+	margin-left: -50px;
 }

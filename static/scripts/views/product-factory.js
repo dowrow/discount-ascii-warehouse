@@ -41,7 +41,7 @@ define([], function () {
 		var formattedDate = formatDate(date);
 		var html = '';
 		html += '<article id="' + id + '" class="product pure-u-1-4">';
-		html +=	'<span class="face"><font size="' + size + '">' + face + '</font></span>';
+		html +=	'<span class="face" style="font-size:' + size + 'px">' + face + '</font></span>';
         html += '<span class="price">' + formattedPrice + '</span>';
         html += '<span class="date">' + formattedDate + '</span>';
         html += '</article>';
