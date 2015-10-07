@@ -4,16 +4,16 @@
  */
 define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-animation', 'views/ad-factory'], function ($, ProductAPI, ProductFactory, LoadingAnimation, AdFactory) {
 
+	var adFrequency = 20;
+	var loadBatchSize = 1000;
+	var showMoreTimeout = 500;
 	var sort = 'id';
 	var fetchingSort = 'id';
 	var products = [];
 	var shownProducts = 0;
 	var loadedProducts = 0;
-	var adFrequency = 20;
 	var showBatchSize = adFrequency;
-	var loadBatchSize = 1000;
 	var endOfCatalogue = false;
-	var showMoreTimeout = 500;
 
 	function setUp () {
 		showMore();	
@@ -80,8 +80,10 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 		var newHtml = '';
 		newProducts.forEach(function (newProduct, index) {
 			newHtml += ProductFactory.create(newProduct.id, newProduct.face, newProduct.size, newProduct.price, newProduct.date);
+			if (index == (adFrequency - 1)) {
+				newHtml += AdFactory.create();
+			}
 		});
-		newHtml += AdFactory.create();
 		$('.products').html($('.products').html() + newHtml);
 		LoadingAnimation.hide();
 		shownProducts += showBatchSize;		

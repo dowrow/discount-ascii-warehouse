@@ -4,9 +4,7 @@
  */
 define(['jquery'], function ($) {
 
-
 	function fetch(sort, skip, limit, callback) {
-
 		var endpoint = 'api/products';
 		var sort = sort || 'id';
 		var skip = skip || 0;
@@ -14,17 +12,13 @@ define(['jquery'], function ($) {
 
 		$.ajax({
 			url: endpoint,
-
 			data: {
 				skip: skip,
 				sort: sort,
 				limit: limit
 			},
-
 			dataType: 'text',
-
 			success: function (data) {
-
 				if (data.length == 0) {
 					callback([]);
 				} else {
@@ -33,13 +27,10 @@ define(['jquery'], function ($) {
 					var products = lines.map(JSON.parse);
 					callback(products);
 				}
-
 			},
-
 			error: function (data) {
 				callback([]);
 			}
-		
 		});
 	}
 

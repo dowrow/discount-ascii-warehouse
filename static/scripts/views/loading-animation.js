@@ -6,7 +6,6 @@
 define(['jquery'], function ($) {
 
 	var url = "/images/spinner.gif";
-
 	var spanElement = $('<span class="pure-u-1-1" id="loading">loading...</span>');
 	var imageElement = $('<img id="spinner" src="' + url + '"/>');
 

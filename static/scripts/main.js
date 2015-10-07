@@ -17,5 +17,4 @@ require(['jquery', 'controllers/grid-controller'], function ($, GridController) 
 	}
 
 	$(document).ready(main);
-
 });
