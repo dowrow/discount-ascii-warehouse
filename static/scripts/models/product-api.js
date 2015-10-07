@@ -36,7 +36,7 @@ define(['jquery'], function ($) {
 
 			},
 
-			error: function () {
+			error: function (data) {
 				callback([]);
 			}
 		

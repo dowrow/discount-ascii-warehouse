@@ -22,7 +22,7 @@ body {
 	line-height: 80px;
 }
 
-#loading {
+#loading, #end {
 	width: 100%;
 	text-align: center;
 }

@@ -8,8 +8,10 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 	var fetchingSort = 'id';
 	var products = [];
 	var shownProducts = 0;
+	var loadedProducts = 0;
 	var showBatchSize = 40;
-	var loadBatchSize = 500;
+	var loadBatchSize = 1000;
+	var endOfCatalogue = false;
 
 	function setUp () {
 		showMore();	
@@ -17,21 +19,28 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 	}
 
 	function loadMore () {
-		var skip = products.length;
-		var limit = loadBatchSize;
-		fetchingSort = sort;
-		ProductAPI.fetch(sort, skip, limit, onProductsLoaded);
+		if (!endOfCatalogue) {
+			var skip = loadedProducts;
+			var limit = loadBatchSize;
+			fetchingSort = sort;
+			ProductAPI.fetch(sort, skip, limit, onProductsLoaded);	
+		}
 	}
 
 	function onProductsLoaded (newProducts) {
 		if (fetchingSort == sort) {
-			saveProducts(newProducts);
+			if (newProducts.length > 0) {
+				saveProducts(newProducts);	
+			} else {
+				endOfCatalogue = true;
+			}
 		}
 		loadMore();
 	}
 
 	function saveProducts (newProducts) {
 		products = products.concat(newProducts);
+		loadedProducts += loadBatchSize;
 	}
 
 	function sortBy (mode) {
@@ -39,6 +48,7 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 			sort = mode;
 			products = [];
 			shownProducts = 0;
+			endOfCatalogue = false;
 			clear();
 			showMore();
 		}
@@ -46,6 +56,11 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 
 	function clear() {
 		$('.products').html('');
+	}
+
+	function showEnd() {
+		var spanElement = $('<span class="pure-u-1-1" id="end">~ end of catalogue ~</span>');
+		spanElement.appendTo('.products');
 	}
 
 	function showMore () {
@@ -83,7 +98,7 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 		setUp: setUp,
 
 		/**
-		 * Changes current sorting mode
+		 * Change current sorting mode
 		 * @param {string} sort Sorting mode ('price', 'size' or 'id')
 		 * @type {void}
 		 */
