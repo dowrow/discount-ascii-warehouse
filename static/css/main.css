@@ -34,3 +34,13 @@ body {
 	left:50%;
 	margin-left: -50px;
 }
+
+.ad {
+	position: relative;
+	width:320px;
+	height: 200px;
+	left: 50%;
+	margin-left: -160px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}

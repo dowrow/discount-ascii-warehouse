@@ -2,16 +2,18 @@
  * Grid Controller
  * Manages the current products grid
  */
-define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-animation'], function ($, ProductAPI, ProductFactory, LoadingAnimation) {
+define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-animation', 'views/ad-factory'], function ($, ProductAPI, ProductFactory, LoadingAnimation, AdFactory) {
 
 	var sort = 'id';
 	var fetchingSort = 'id';
 	var products = [];
 	var shownProducts = 0;
 	var loadedProducts = 0;
-	var showBatchSize = 40;
+	var adFrequency = 20;
+	var showBatchSize = adFrequency * 2;
 	var loadBatchSize = 1000;
 	var endOfCatalogue = false;
+	var showMoreTimeout = 500;
 
 	function setUp () {
 		showMore();	
@@ -48,6 +50,7 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 			sort = mode;
 			products = [];
 			shownProducts = 0;
+			loadedProducts = 0;
 			endOfCatalogue = false;
 			clear();
 			showMore();
@@ -64,28 +67,28 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 	}
 
 	function showMore () {
-
 		if (products.length == 0) {
-		
 			LoadingAnimation.show();
-			setTimeout(showMore, 500);
-		
+			setTimeout(showMore, showMoreTimeout);
 		} else {
-
-			var newProducts = products.splice(shownProducts, showBatchSize);
-			var newHtml = '';
-
-			newProducts.forEach(function (newProduct) {
-				newHtml += ProductFactory.create(newProduct.id, newProduct.face, newProduct.size, newProduct.price, newProduct.date);
-			});
-			
-			$('.products').html($('.products').html() + newHtml);
-			LoadingAnimation.hide();
-			shownProducts += showBatchSize;			
+			showProducts();	
 		}
-
 	}
 
+	function showProducts () {
+		var newProducts = products.splice(shownProducts, showBatchSize);
+		var newHtml = '';
+		newProducts.forEach(function (newProduct, index) {
+			if (index == adFrequency) {
+				newHtml += AdFactory.create();
+			}
+			newHtml += ProductFactory.create(newProduct.id, newProduct.face, newProduct.size, newProduct.price, newProduct.date);
+		});
+		$('.products').html($('.products').html() + newHtml);
+		LoadingAnimation.hide();
+		shownProducts += showBatchSize;		
+	}
+	
 	/*
 	 * Public interface
 	 */

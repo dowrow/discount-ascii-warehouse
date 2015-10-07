@@ -59,7 +59,7 @@ define([], function () {
 		 * @param {integer} size Size in pixels
 		 * @param {integer} price Price in cents
 		 * @param {string} date Date as timestamp
-		 * @type {void}
+		 * @type {string}
 		 */
 		create: create
 	}
