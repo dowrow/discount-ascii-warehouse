@@ -10,7 +10,7 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 	var shownProducts = 0;
 	var loadedProducts = 0;
 	var adFrequency = 20;
-	var showBatchSize = adFrequency * 2;
+	var showBatchSize = adFrequency;
 	var loadBatchSize = 1000;
 	var endOfCatalogue = false;
 	var showMoreTimeout = 500;
@@ -79,16 +79,14 @@ define(['jquery', 'models/product-api', 'views/product-factory', 'views/loading-
 		var newProducts = products.splice(shownProducts, showBatchSize);
 		var newHtml = '';
 		newProducts.forEach(function (newProduct, index) {
-			if (index == adFrequency) {
-				newHtml += AdFactory.create();
-			}
 			newHtml += ProductFactory.create(newProduct.id, newProduct.face, newProduct.size, newProduct.price, newProduct.date);
 		});
+		newHtml += AdFactory.create();
 		$('.products').html($('.products').html() + newHtml);
 		LoadingAnimation.hide();
 		shownProducts += showBatchSize;		
 	}
-	
+
 	/*
 	 * Public interface
 	 */
